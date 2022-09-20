@@ -1,0 +1,24 @@
+  <?php
+  
+  $user_name = 'example_user';
+  $password = 'example_pass';
+  $ch1 = curl_init();
+  curl_setopt($ch1, CURLOPT_RETURNTRANSFER, true);
+  curl_setopt($ch1, CURLOPT_TIMEOUT, 100);
+  curl_setopt($ch1, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+  $api_request_url = 'example_api_request_url';
+  curl_setopt($ch1, CURLOPT_URL, $api_request_url);
+  curl_setopt($ch1, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+  curl_setopt($ch1, CURLOPT_USERPWD, "$user_name:$password");
+  $resp1 = curl_exec($ch1);
+  if($e1 = curl_error($ch1))
+  {
+    echo $e1;
+  }
+  else 
+  {
+    $json_data1 = json_decode($resp1,true); 
+    print_r($json_data1);
+  }
+  curl_close($ch1);
+  
